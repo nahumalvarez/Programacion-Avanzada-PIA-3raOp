@@ -59,6 +59,7 @@ while True:
 
     if opcion == "1":
         empleado1 = Empleado()
+        print("Operacion exitosa")
     if opcion == "2":
         empleado1.imprimir()
     elif opcion == "3":
