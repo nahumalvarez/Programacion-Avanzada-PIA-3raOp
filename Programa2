@@ -1,0 +1,87 @@
+class Materia:
+    def __init__(self):
+        # Atributos ingresados por teclado
+        self.nombre = input("Ingrese el nombre de la materia: ")
+        self.profesor = input("Ingrese el nombre del profesor: ")
+        self.calificacion = float(input("Ingrese la calificación obtenida: "))
+        self.creditos = int(input("Ingrese los créditos de la materia: "))
+        self.semestre = int(input("Ingrese el semestre: "))
+
+    def mostrar_info(self):
+        print("\n=== Información de la Materia ===")
+        print(f"Materia: {self.nombre}")
+        print(f"Profesor: {self.profesor}")
+        print(f"Calificación: {self.calificacion}")
+        print(f"Créditos: {self.creditos}")
+        print(f"Semestre: {self.semestre}")
+
+    def aprobar(self):
+        if self.calificacion >= 6:
+            print(f"La materia '{self.nombre}' está APROBADA")
+        else:
+            print(f"La materia '{self.nombre}' está REPROBADA")
+
+    def calcular_promedio(self, otras_materias):
+        total = self.calificacion
+        for mat in otras_materias:
+            total += mat.calificacion
+        promedio = total / (len(otras_materias) + 1)
+        print(f"El promedio actual es: {promedio:.2f}")
+        return promedio
+
+    def mostrar_ticket(self):
+        print("\n" + "="*30)
+        print("       TICKET DE MATERIA")
+        print("="*30)
+        print(f"Materia: {self.nombre}")
+        print(f"Profesor: {self.profesor}")
+        print(f"Calificación: {self.calificacion}")
+        print(f"Créditos: {self.creditos}")
+        print(f"Semestre: {self.semestre}")
+        self.aprobar()
+        print("="*30)
+
+
+# ====== Programa principal con menú ======
+materias = []  # Lista para almacenar las materias
+
+while True:
+    print("\n--- MENÚ DE OPCIONES ---")
+    print("1. Registrar nueva materia")
+    print("2. Mostrar todas las materias")
+    print("3. Ver ticket de una materia")
+    print("4. Calcular promedio general")
+    print("5. Salir")
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        nueva = Materia()
+        materias.append(nueva)
+        print("Materia registrada con éxito.")
+    elif opcion == "2":
+        if len(materias) == 0:
+            print("No hay materias registradas.")
+        else:
+            for i, mat in enumerate(materias, start=1):
+                print(f"\nMateria #{i}:")
+                mat.mostrar_info()
+    elif opcion == "3":
+        if len(materias) == 0:
+            print("No hay materias registradas.")
+        else:
+            num = int(input(f"Ingrese el número de materia (1-{len(materias)}): "))
+            if 1 <= num <= len(materias):
+                materias[num-1].mostrar_ticket()
+            else:
+                print("Número inválido.")
+    elif opcion == "4":
+        if len(materias) == 0:
+            print("No hay materias para calcular promedio.")
+        else:
+            materias[0].calcular_promedio(materias[1:])  # usa el método de la primera
+    elif opcion == "5":
+        print("Saliendo del programa... ¡Hasta luego!")
+        break
+    else:
+        print("Opción inválida, intente de nuevo.")

@@ -1,0 +1,75 @@
+class Empleado:
+    def __init__(self):
+        # Atributos ingresados por teclado
+        self.nombre = input("Ingrese el nombre del empleado: ")
+        self.sueldo = float(input("Ingrese cuánto gana: "))
+        self.departamento = input("Ingrese el departamento: ")
+        self.antiguedad = int(input("Ingrese la antigüedad (años): "))
+        self.telefono = input("Ingrese el número de teléfono: ")
+
+    def imprimir(self):
+        print("\n=== Datos del Empleado ===")
+        print("Nombre: ", self.nombre)
+        print("Sueldo: ", self.sueldo)
+        print("Departamento: ", self.departamento)
+        print("Antigüedad: ", self.antiguedad, "años")
+        print("Teléfono: ", self.telefono)
+
+    def paga_impuestos(self):
+        if self.sueldo > 3000:
+            print("Debe pagar impuestos.")
+        else:
+            print("No debe pagar impuestos.")
+
+    def calcular_bono(self):
+        bono = self.antiguedad * 100
+        print(f"Bono por antigüedad: ${bono}")
+        return bono
+
+    def aumento_sueldo(self, porcentaje):
+        aumento = self.sueldo * (porcentaje / 100)
+        self.sueldo += aumento
+        print(f"Se aplicó un aumento de {porcentaje}%. Nuevo sueldo: ${self.sueldo}")
+
+    def mostrar_ticket(self):
+        print("\n" + "="*30)
+        print("        TICKET EMPLEADO")
+        print("="*30)
+        print(f"Nombre: {self.nombre}")
+        print(f"Departamento: {self.departamento}")
+        print(f"Antigüedad: {self.antiguedad} años")
+        print(f"Teléfono: {self.telefono}")
+        print(f"Sueldo: ${self.sueldo}")
+        self.paga_impuestos()
+        print("="*30)
+
+
+# ====== Programa principal con menú ======
+
+while True:
+    print("\n--- MENÚ DE OPCIONES ---")
+    print("1. Agregar datos del empleado")
+    print("2. Mostrar datos del empleado")
+    print("3. Calcular bono por antigüedad")
+    print("4. Aplicar aumento de sueldo")
+    print("5. Mostrar ticket")
+    print("6. Salir")
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        empleado1 = Empleado()
+    if opcion == "2":
+        empleado1.imprimir()
+    elif opcion == "3":
+        empleado1.calcular_bono()
+    elif opcion == "4":
+        porcentaje = float(input("Ingrese el porcentaje de aumento: "))
+        empleado1.aumento_sueldo(porcentaje)
+    elif opcion == "5":
+        empleado1.mostrar_ticket()
+    elif opcion == "6":
+        print("Saliendo del programa... ¡Hasta luego!")
+        break
+    else:
+        print("Opción inválida, intente de nuevo.")
